@@ -1,4 +1,4 @@
-![](https://ws3.sinaimg.cn/large/006tNbRwgy1fvypruu8l3j30dw0dwq2q.jpg)
+![](https://ws1.sinaimg.cn/large/006tNbRwgy1fvypth9y9sj30dw09qgle.jpg)
 # BambooRat
 
 
