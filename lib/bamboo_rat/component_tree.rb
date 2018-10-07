@@ -1,7 +1,7 @@
 module BambooRat
   class ComponentTree
     attr_reader :ruby_components, :js, :components
-  
+
     def initialize(path)
       @path = path
       @branch = branch
@@ -10,9 +10,9 @@ module BambooRat
       @components = map_components
       self
     end
-    
+
     def map_components
-      folders = Dir[File.join(@path, "/*/*")].select do |entry|
+      folders = Dir[File.join(@path, '/*/*')].select do |entry|
         File.directory? entry
       end
       folders.each do |path|
@@ -22,7 +22,7 @@ module BambooRat
       @ruby_components + @js_components
     end
 
-    def formated_data(format)
+    def formated_data(_format)
       {
         components: @components,
         ruby_components: @ruby_components,
