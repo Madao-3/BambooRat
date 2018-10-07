@@ -1,20 +1,23 @@
 module BambooRat
   class ComponentTree
+    attr_reader :ruby_components, :js, :components
+  
     def initialize(path)
+      @path = path
+      @branch = branch
       @ruby_components = Set.new
       @js_components = Set.new
       @components = map_components
-
       self
     end
-
+    
     def map_components
-      folders = Dir['*/*'].select do |entry|
+      folders = Dir[File.join(@path, "/*/*")].select do |entry|
         File.directory? entry
       end
       folders.each do |path|
-        @ruby_components << path if RubyComponent.ruby?(path)
-        @js_components << path if JSComponent.js?(path)
+        @ruby_components << RubyComponent.new(path) if RubyComponent.ruby?(path)
+        @js_components << JSComponent.new(path) if JSComponent.js?(path)
       end
       @ruby_components + @js_components
     end
@@ -28,9 +31,19 @@ module BambooRat
     end
   end
 
-  class RubyComponent
+  def Component
     def initialize(path)
       @path = path
+    end
+
+    def name
+      raise NotImplementedError
+    end
+  end
+
+  class RubyComponent
+    def name
+      'Ruby'
     end
 
     def self.gem_path(path)
@@ -43,8 +56,8 @@ module BambooRat
   end
 
   class JSComponent
-    def initialize(path)
-      @path = path
+    def name
+      'JS'
     end
 
     def self.package_path(path)

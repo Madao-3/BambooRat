@@ -7,8 +7,7 @@ module BambooRat
                            aliases: '-f',
                            desc: 'Response Fromat'
     def diff(path)
-      @tree = ComponentTree.new(path)
-      puts @tree.formated_data(options.format)
+      puts Diff.new(path, options.format).formatted_data
     end
   end
 end
