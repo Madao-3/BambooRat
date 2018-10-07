@@ -1,19 +1,23 @@
+require 'json'
+
 module BambooRat
   class Diff
-    def initialize(path, branch = 'master')
+    def initialize(tree, path, branch, format)
+      @tree = tree
       @path = path
       @branch = branch
-      @tree = ComponentTree.new(path)
+      @format = format
       @diff_components = diff_components
       self
     end
 
     def formatted_data
+      return { diff: @diff_components }.to_json if @format == 'simple'
       {
-        js_components: @tree.js_components,
-        ruby_components: @tree.ruby_components,
+        js_components: @tree.js_components.map(&:path),
+        ruby_components: @tree.ruby_components.map(&:path),
         diff: @diff_components,
-        components: @tree.components
+        components: @tree.components.map(&:path)
       }
     end
 
@@ -25,10 +29,14 @@ module BambooRat
       }
       files.each do |file|
         @tree.components.each do |component|
-          reg = Regexp.new "^#{component}"
-          component_hash[component.name == 'Ruby' ? :ruby : :js] << component if reg.match("#{@path}#{file}")
+          reg = Regexp.new "^#{component.path}"
+          key = component.name == 'Ruby' ? :ruby : :js
+          component_hash[key] << component.path if reg.match("#{@path}#{file}")
         end
       end
+      component_hash[:js] = component_hash[:js].to_a
+      component_hash[:ruby] = component_hash[:ruby].to_a
+      component_hash
     end
   end
 end

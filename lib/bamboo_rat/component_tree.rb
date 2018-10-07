@@ -1,6 +1,6 @@
 module BambooRat
   class ComponentTree
-    attr_reader :ruby_components, :js, :components
+    attr_reader :ruby_components, :js_components, :components
 
     def initialize(path)
       @path = path
@@ -20,17 +20,11 @@ module BambooRat
       end
       @ruby_components + @js_components
     end
-
-    def formated_data(_format)
-      {
-        components: @components,
-        ruby_components: @ruby_components,
-        js_components: @js_components
-      }
-    end
   end
 
-  def Component
+  class Component
+    attr_reader :path
+
     def initialize(path)
       @path = path
     end
@@ -40,7 +34,7 @@ module BambooRat
     end
   end
 
-  class RubyComponent
+  class RubyComponent < Component
     def name
       'Ruby'
     end
@@ -54,7 +48,7 @@ module BambooRat
     end
   end
 
-  class JSComponent
+  class JSComponent < Component
     def name
       'JS'
     end
