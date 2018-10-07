@@ -1,9 +1,7 @@
-![](https://ws1.sinaimg.cn/large/006tNbRwgy1fvypth9y9sj30dw09qgle.jpg)
 # BambooRat
+A CLI Tool for CBRA Project
 
-
-
-TODO: Delete this and the text above, and describe your gem
+![](https://ws3.sinaimg.cn/large/006tNbRwgy1fvzojfovwxj30dw09qgle.jpg)
 
 ## Installation
 
@@ -23,7 +21,13 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+Commands:
+  bamboo_rat diff [PATH]     # Show changed components.
+  bamboo_rat help [COMMAND]  # Describe available commands or one specific command
+  bamboo_rat ls [PATH]       # Show components list.
+```
+
 
 ## Development
 
