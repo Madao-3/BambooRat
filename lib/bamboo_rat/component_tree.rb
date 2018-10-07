@@ -4,7 +4,6 @@ module BambooRat
 
     def initialize(path)
       @path = path
-      @branch = branch
       @ruby_components = Set.new
       @js_components = Set.new
       @components = map_components
