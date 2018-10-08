@@ -24,7 +24,7 @@ module BambooRat
     end
 
     def diff_components
-      files = `git diff #{@branch} --name-only`.split /\n/
+      files = `git diff --name-only #{@branch}`.split /\n/
       component_hash = {
         js: Set.new,
         ruby: Set.new
